@@ -20,11 +20,13 @@ module.exports = function (context, myTimer) {
         'statuses/update',
         {status: 'Now: ' + new Date()},
         function(error, tweet, response) {
-            if(error) {
+            if (error) {
                 context.log(error);
             };
-            context.log(tweet);
-            context.log(response);
+            if (process.env.NODE_ENV === 'development') {
+                context.log(tweet);
+                context.log(response);
+            }
             context.done();
         }
     );  
