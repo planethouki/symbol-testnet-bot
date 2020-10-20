@@ -34,7 +34,7 @@ module.exports = function (context, myTimer) {
     }).then(({numBlocks, numTransactions, numAccounts}) => {
         twitter.post(
             'statuses/update',
-            {status: `Num Blocks: ${numBlocks}\nNum Transactions: ${numTransactions}\nNum Accounts: ${numAccounts}`},
+            {status: `Symbol Testnet\nNum Blocks: ${numBlocks}\nNum Transactions: ${numTransactions}\nNum Accounts: ${numAccounts}`},
             function(error, tweet, response) {
                 if (error) {
                     context.log(error);
