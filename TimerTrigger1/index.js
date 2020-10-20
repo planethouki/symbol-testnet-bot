@@ -28,13 +28,13 @@ module.exports = function (context, myTimer) {
         access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
     });
     
-    axios.get("/chain/info").then((res) => {
+    axios.get("/node/storage").then((res) => {
         context.log(res.data);
-        return res.data.height
-    }).then((height) => {
+        return res.data
+    }).then(({numBlocks, numTransactions, numAccounts}) => {
         twitter.post(
             'statuses/update',
-            {status: 'Current Height: ' + height},
+            {status: `Num Blocks: ${numBlocks}\nNum Transactions: ${numTransactions}\nNum Accounts: ${numAccounts}`},
             function(error, tweet, response) {
                 if (error) {
                     context.log(error);
