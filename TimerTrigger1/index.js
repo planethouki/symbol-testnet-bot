@@ -1,7 +1,13 @@
 const Twitter = require('twitter');
 
-module.exports = async function (context, myTimer) {
+module.exports = function (context, myTimer) {
     const timeStamp = new Date().toISOString();
+    
+    if (myTimer.isPastDue)
+    {
+        context.log('JavaScript is running late!');
+    }
+    context.log('JavaScript timer trigger function ran!', timeStamp); 
 
     const client = new Twitter({
         consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -14,15 +20,12 @@ module.exports = async function (context, myTimer) {
         'statuses/update',
         {status: 'Now: ' + new Date()},
         function(error, tweet, response) {
-            if(error) throw error;
-            console.log(tweet);
-            console.log(response);
+            if(error) {
+                context.log(error);
+            };
+            context.log(tweet);
+            context.log(response);
+            context.done();
         }
-    );
-    
-    if (myTimer.isPastDue)
-    {
-        context.log('JavaScript is running late!');
-    }
-    context.log('JavaScript timer trigger function ran!', timeStamp);   
+    );  
 };
