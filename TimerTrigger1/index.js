@@ -18,6 +18,7 @@ module.exports = function (context, myTimer) {
 
     const nodeList = process.env.NODES_CSV.split(",");
     const node = nodeList[getRandomInt(0, nodeList.length)]
+    context.log(`node: ${node}`);
     axios.default.baseURL = node;
 
     const twitter = new Twitter({
@@ -28,6 +29,7 @@ module.exports = function (context, myTimer) {
     });
     
     axios.get("/chain/info").then((res) => {
+        context.log(res.data);
         return res.data.height
     }).then((height) => {
         twitter.post(
@@ -44,6 +46,9 @@ module.exports = function (context, myTimer) {
                 context.done();
             }
         );
+    }).catch((e) => {
+        context.log(e);
+        context.done();
     })
 
 };
