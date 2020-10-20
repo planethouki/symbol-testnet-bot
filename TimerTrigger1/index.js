@@ -19,7 +19,7 @@ module.exports = function (context, myTimer) {
     const nodeList = process.env.NODES_CSV.split(",");
     const node = nodeList[getRandomInt(0, nodeList.length)]
     context.log(`node: ${node}`);
-    axios.default.baseURL = node;
+    axios.defaults.baseURL = node;
 
     const twitter = new Twitter({
         consumer_key: process.env.TWITTER_CONSUMER_KEY,
