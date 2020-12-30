@@ -35,27 +35,31 @@ module.exports = function (context, myTimer) {
         access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
     });
     
-    axios.get("/node/storage").then((res) => {
-        context.log(res.data);
-        return res.data
-    }).then(({numBlocks, numTransactions, numAccounts}) => {
-        twitter.post(
-            'statuses/update',
-            {status: `Symbol Testnet\nNum Blocks: ${numBlocks}\nNum Transactions: ${numTransactions}\nNum Accounts: ${numAccounts}`},
-            function(error, tweet, response) {
-                if (error) {
-                    context.log(error);
-                };
-                if (process.env.NODE_ENV === 'development') {
-                    context.log(tweet);
-                    context.log(response);
+    axios
+        .get("/node/storage", { timeout: 5000 })
+        .then((res) => {
+            context.log(res.data);
+            return res.data
+        })
+        .then(({numBlocks, numTransactions, numAccounts}) => {
+            twitter.post(
+                'statuses/update',
+                {status: `Symbol Testnet\nNum Blocks: ${numBlocks}\nNum Transactions: ${numTransactions}\nNum Accounts: ${numAccounts}`},
+                function(error, tweet, response) {
+                    if (error) {
+                        context.log(error);
+                    };
+                    if (process.env.NODE_ENV === 'development') {
+                        context.log(tweet);
+                        context.log(response);
+                    }
+                    context.done();
                 }
-                context.done();
-            }
-        );
-    }).catch((e) => {
-        context.log(e);
-        context.done();
-    })
+            );
+        })
+        .catch((e) => {
+            context.log(e);
+            context.done();
+        })
 
 };
