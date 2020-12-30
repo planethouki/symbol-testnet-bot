@@ -37,15 +37,23 @@ module.exports = function (context, myTimer) {
 
     for (let i = 0; i < nodeList.length; i++) {
         const { url, name } = nodeList[i];
-            
-        const data = await axios.get(`${url}/chain/info`).then((res) => {
-            return res.data
-        }).catch((e) => {
-            context.log(e);
-            return null;
-        });
 
-        if (data === null) continue;
+        context.log(`${name} getting...`);
+            
+        const data = await axios
+            .get(`${url}/chain/info`, { timeout: 5000 })
+            .then((res) => {
+                return res.data
+            })
+            .catch((e) => {
+                context.log(e);
+                return null;
+            });
+
+        if (data === null) {
+            context.log(`${name} fail.`);
+            continue;
+        };
         
         textLines.push(`${name}:${data.height}:${datalatestFinalizedBlock.height}:${data.latestFinalizedBlock.hash.substr(0, 6)}...`);
     }
@@ -61,6 +69,7 @@ module.exports = function (context, myTimer) {
                 context.log(tweet);
                 context.log(response);
             }
+            context.log('finish.')
             context.done();
         }
     );
