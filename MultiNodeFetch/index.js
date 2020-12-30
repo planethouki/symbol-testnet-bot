@@ -33,7 +33,7 @@ module.exports = async function (context, myTimer) {
     });
 
     const textLines = [];
-    textLines.push("node:height:finalizedHeight:finalizedHash");
+    textLines.push("node : height : finalizedHeight : finalizedHash");
 
     for (let i = 0; i < nodeList.length; i++) {
         const { url, name } = nodeList[i];
@@ -55,7 +55,7 @@ module.exports = async function (context, myTimer) {
             continue;
         };
         
-        textLines.push(`${name}:${data.height}:${data.latestFinalizedBlock.height}:${data.latestFinalizedBlock.hash.substr(0, 6)}...`);
+        textLines.push(`${name} : ${data.height} : ${data.latestFinalizedBlock.height} : ${data.latestFinalizedBlock.hash.substr(0, 6)}...`);
     }
     
     twitter.post(
