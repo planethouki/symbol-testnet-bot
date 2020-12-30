@@ -46,7 +46,7 @@ module.exports = function (context, myTimer) {
                 return res.data
             })
             .catch((e) => {
-                context.log(e);
+                context.log.error(e);
                 return null;
             });
 
@@ -63,7 +63,7 @@ module.exports = function (context, myTimer) {
         {status: textLines.join("\n")},
         function(error, tweet, response) {
             if (error) {
-                context.log(error);
+                context.log.error(error);
             };
             if (process.env.NODE_ENV === 'development') {
                 context.log(tweet);
