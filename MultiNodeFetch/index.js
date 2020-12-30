@@ -41,7 +41,7 @@ module.exports = async function (context, myTimer) {
         context.log(`${name} getting...`);
             
         const data = await axios
-            .get(`${url}/chain/info`, { timeout: 5000 })
+            .get(`${url}/chain/info`, { timeout: 15000 })
             .then((res) => {
                 return res.data
             })
@@ -57,21 +57,27 @@ module.exports = async function (context, myTimer) {
         
         textLines.push(`${name} : ${data.height} : ${data.latestFinalizedBlock.height} : ${data.latestFinalizedBlock.hash.substr(0, 6)}...`);
     }
+
+    context.log(`text lines: ${textLines.length}`);
     
-    twitter.post(
-        'statuses/update',
-        {status: textLines.join("\n")},
-        function(error, tweet, response) {
-            if (error) {
-                context.log.error(error);
-            };
-            if (process.env.NODE_ENV === 'development') {
-                context.log(tweet);
-                context.log(response);
+    await new Promise((resolve, reject) => {
+        twitter.post(
+            'statuses/update',
+            {status: textLines.join("\n")},
+            function(error, tweet, response) {
+                if (error) {
+                    context.log.error(error);
+                    return reject();
+                };
+                if (process.env.NODE_ENV === 'development') {
+                    context.log(tweet);
+                    context.log(response);
+                }
+                context.log('finish.')
+                resolve();
             }
-            context.log('finish.')
-            context.done();
-        }
-    );
+        );
+    });
+
 
 };
