@@ -37,7 +37,7 @@ module.exports = async function (context, myTimer) {
         context.log(`node: ${node}`);
     
         const isSuccess = await axios
-            .get(`${node}/node/storage`, { timeout: 5000 })
+            .get(`${node}/node/storage`, { timeout: 15000 })
             .then((res) => {
                 context.log(res.data);
                 return res.data
