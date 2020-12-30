@@ -17,12 +17,12 @@ module.exports = async function (context, myTimer) {
     context.log('JavaScript timer trigger function ran!', timeStamp);
 
     const nodeList = [
-        { url: "http://api-01.ap-northeast-1.0.10.0.x.symboldev.network:3000", name: "ap-northeast-1" },
-        { url: "http://api-01.ap-southeast-1.0.10.0.x.symboldev.network:3000", name: "ap-southeast-1" },
-        { url: "http://api-01.eu-central-1.0.10.0.x.symboldev.network:3000", name: "eu-central-1" },
-        { url: "http://api-01.eu-west-1.0.10.0.x.symboldev.network:3000", name: "eu-west-1" },
-        { url: "http://api-01.us-east-1.0.10.0.x.symboldev.network:3000", name: "us-east-1" },
-        { url: "http://api-01.us-west-1.0.10.0.x.symboldev.network:3000", name: "us-west-1" }
+        { url: "http://api-01.ap-northeast-1.0.10.0.x.symboldev.network:3000", name: "ap-ne-1" },
+        { url: "http://api-01.ap-southeast-1.0.10.0.x.symboldev.network:3000", name: "ap-se-1" },
+        { url: "http://api-01.eu-central-1.0.10.0.x.symboldev.network:3000", name: "eu-c-1" },
+        { url: "http://api-01.eu-west-1.0.10.0.x.symboldev.network:3000", name: "eu-w-1" },
+        { url: "http://api-01.us-east-1.0.10.0.x.symboldev.network:3000", name: "us-e-1" },
+        { url: "http://api-01.us-west-1.0.10.0.x.symboldev.network:3000", name: "us-w-1" }
     ];
 
     const twitter = new Twitter({
@@ -33,7 +33,7 @@ module.exports = async function (context, myTimer) {
     });
 
     const textLines = [];
-    textLines.push("node : height : finalizedHeight : finalizedHash");
+    textLines.push("node : height : f-height : f-hash");
 
     for (let i = 0; i < nodeList.length; i++) {
         const { url, name } = nodeList[i];
@@ -55,7 +55,7 @@ module.exports = async function (context, myTimer) {
             continue;
         };
         
-        textLines.push(`${name} : ${data.height} : ${data.latestFinalizedBlock.height} : ${data.latestFinalizedBlock.hash.substr(0, 6)}...`);
+        textLines.push(`${name} : ${data.height} : ${data.latestFinalizedBlock.height} : ${data.latestFinalizedBlock.hash.substr(0, 4)}...`);
     }
 
     context.log(`text lines: ${textLines.length}`);
