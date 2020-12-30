@@ -71,9 +71,10 @@ module.exports = async function (context, myTimer) {
 
         if (isSuccess) {
             context.log("success")
-            break;
+            return context.done();
         }
     }
     
+    throw new Error('fail');
 
 };
