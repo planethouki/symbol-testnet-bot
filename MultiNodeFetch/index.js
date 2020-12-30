@@ -55,7 +55,7 @@ module.exports = async function (context, myTimer) {
             continue;
         };
         
-        textLines.push(`${name}:${data.height}:${datalatestFinalizedBlock.height}:${data.latestFinalizedBlock.hash.substr(0, 6)}...`);
+        textLines.push(`${name}:${data.height}:${data.latestFinalizedBlock.height}:${data.latestFinalizedBlock.hash.substr(0, 6)}...`);
     }
     
     twitter.post(
