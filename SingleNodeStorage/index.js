@@ -7,7 +7,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
-module.exports = function (context, myTimer) {
+module.exports = async function (context, myTimer) {
     const timeStamp = new Date().toISOString();
     
     if (myTimer.isPastDue)
