@@ -17,12 +17,13 @@ module.exports = async function (context, myTimer) {
     context.log('JavaScript timer trigger function ran!', timeStamp);
 
     const nodeList = [
-        { url: "http://api-01.ap-northeast-1.testnet.symboldev.network:3000", name: "ap-ne-1" },
-        { url: "http://api-01.ap-southeast-1.testnet.symboldev.network:3000", name: "ap-se-1" },
-        { url: "http://api-01.eu-central-1.testnet.symboldev.network:3000", name: "eu-c-1" },
-        { url: "http://api-01.eu-west-1.testnet.symboldev.network:3000", name: "eu-w-1" },
-        { url: "http://api-01.us-east-1.testnet.symboldev.network:3000", name: "us-e-1" },
-        { url: "http://api-01.us-west-1.testnet.symboldev.network:3000", name: "us-w-1" }
+        { url: "http://ngl-dual-001.testnet.symboldev.network:3000", name: "ngl-0" },
+        { url: "http://ngl-dual-101.testnet.symboldev.network:3000", name: "ngl-1" },
+        { url: "http://ngl-dual-201.testnet.symboldev.network:3000", name: "ngl-2" },
+        { url: "http://ngl-dual-301.testnet.symboldev.network:3000", name: "ngl-3" },
+        { url: "http://ngl-dual-401.testnet.symboldev.network:3000", name: "ngl-4" },
+        { url: "http://ngl-dual-501.testnet.symboldev.network:3000", name: "ngl-5" },
+        { url: "http://ngl-dual-601.testnet.symboldev.network:3000", name: "ngl-6" }
     ];
 
     const twitter = new Twitter({
