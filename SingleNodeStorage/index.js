@@ -17,13 +17,7 @@ module.exports = async function (context, myTimer) {
     context.log('JavaScript timer trigger function ran!', timeStamp);
 
     const nodeList = [
-        { url: "http://ngl-dual-001.testnet.symboldev.network:3000", name: "ngl-0" },
-        { url: "http://ngl-dual-101.testnet.symboldev.network:3000", name: "ngl-1" },
-        { url: "http://ngl-dual-201.testnet.symboldev.network:3000", name: "ngl-2" },
-        { url: "http://ngl-dual-301.testnet.symboldev.network:3000", name: "ngl-3" },
-        { url: "http://ngl-dual-401.testnet.symboldev.network:3000", name: "ngl-4" },
-        { url: "http://ngl-dual-501.testnet.symboldev.network:3000", name: "ngl-5" },
-        { url: "http://ngl-dual-601.testnet.symboldev.network:3000", name: "ngl-6" }
+        { url: "https://dg0nbr5d1ohfy.cloudfront.net", name: "dg0nbr5d1ohfy" },
     ];
 
     const twitter = new Twitter({
